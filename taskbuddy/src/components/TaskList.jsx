@@ -1,9 +1,8 @@
 import React from "react";
-
-export default function TaskList(tasks, updateTask, deleteTask) {
+function TaskList({ tasks, updateTask, deleteTask }) {
   const toggleComplete = (index) => {
-    const updateTask = { ...tasks[index], completed: !tasks[index].completed };
-    updateTask(index, updateTask);
+    const updatedTask = { ...tasks[index], completed: !tasks[index].completed };
+    updateTask(index, updatedTask);
   };
   return (
     <ul className="task-list">
@@ -26,3 +25,5 @@ export default function TaskList(tasks, updateTask, deleteTask) {
     </ul>
   );
 }
+
+export default TaskList;
