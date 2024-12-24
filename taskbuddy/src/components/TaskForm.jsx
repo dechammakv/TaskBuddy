@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 
-export default function TaskForm() {
+export default function TaskForm(addTask) {
   const [task, setTask] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [category, setCategory] = useState("General");
+
+  const handlesubmit = (e) => {
+    e.preventDefault();
+    addTask({ text: task, priority, category, completed: false });
+    //reset state
+    setPriority("Medium");
+    setCategory("General");
+    setTask("");
+  };
+
   return (
-    <form action="" className="task-form">
+    <form action="" className="task-form" onSubmit={handlesubmit}>
       <div id="inp">
         <input
           type="text"
@@ -26,9 +36,9 @@ export default function TaskForm() {
           value={priority}
           onChange={(e) => setPriority(e.target.value)}
         >
-          <option value="">Medium</option>
-          <option value="">Low</option>
-          <option value="">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+          <option value="high">High</option>
         </select>
         <select
           name=""
@@ -36,12 +46,11 @@ export default function TaskForm() {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
-          <option value="">General</option>
-          <option value="">Work</option>
-          <option value="">Personel</option>
+          <option value="general">General</option>
+          <option value="work">Work</option>
+          <option value="personel">Personel</option>
         </select>
       </div>
-      <h1>{task}</h1>
     </form>
   );
 }
